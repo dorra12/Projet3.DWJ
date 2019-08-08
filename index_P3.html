@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Site de réservation de Vélos en ligne au Luxembourg</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+		<link rel="stylesheet" href="stylesheet_location_velo.css">
+		<meta name="description" content="VeloCityLuxembourg, application de location en ligne de vélo au Luxembourg" />
+		<link rel="icon" type="image/png" href="images/logo_velo.png" />
+		
+		<!--lien API MAP-->
+		<script src='https://api.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js'></script>
+		<link href='https://api.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css' rel='stylesheet' />
+		<!--lien API MAP-->
+		
+		<!-- favicon -->
+
+		<!-- Google Fonts -->
+
+		<!-- Description-->
+		<meta name="description" content="VeloCityLuxembourg, application de location en ligne de vélo au Luxembourg" />
+		<meta name="keywords" content="application, velo, vélo, Luxembourg" />
+		<meta name="author" content="Dorra" />
+		
+    </head>
+    	
+    <body>
+    	<!--Balise MAPBox-->
+    	<div class="mapZone"> 
+		<div id='map'></div>
+		</div>
+		
+    	<header id="menu">
+    		<!-- Barre de navigation -->
+    		<nav>
+    		<img src="images/logo_velo.png" alt="logo du velo">
+    		<h1>Visitez Luxembourg à Vélo </h1>
+    			<ul id="menu_burger">
+    				<li>
+    					<a href="#diapo">accueil</a></li>
+    				<li >
+    					<a href="#carte_et_stations">Carte</a></li>
+    				<li>
+    					<a href="#footer">Contact</a></li>
+    			</ul>
+    		</nav>
+    	</header>
+
+    	<section id=diaporama>
+    		<div id="diaporama-description">
+    			<h2> Bienvenue sur notre site.</h2>
+    			<p>Disponible 24h/24 et 7j/7 vel'OH! vous accompagne à chaque instant.</p>
+    			<p>Ici, le site vous permet de connaitre des vélos disponibles dans les stations et choisir le vélo de votre choix</p>
+    		</div>
+    		
+    		<div id="diaporama-slider">
+    			<div class="conteneur">
+    				<div id=carousel1>
+    					<div class="image">
+    						<img id="diapo" src="images/image1.png" alt="image_1">
+    					</div>
+    					<div class=text_image>
+	    					<h2> Bienvenue sur Vél'oh</h2>
+	    					<p>Vous cherchez un moyen écologique de vous déplacer sur Luxembourg ?<br/>
+					   Réservez votre vélo maintenant en suivant ces quelques étapes.
+					</div>
+				</div>
+					<!-- premier Slide -->
+    				
+						<!-- Deuxième Slide -->
+    				<div id=carousel2>
+    					<div class="image">
+    						<img src="images/image2.jpeg" alt="image_2">
+    					</div>
+    					<div class=text_image>
+	    					<h2> 1 : Choisir sa Station</h2>
+	    					<p>Rien de plus simple, allez sur la carte et sélectionner la station grâce aux marqueurs sur la carte. </p>
+    					</div>
+
+    				</div>
+
+ 						<!-- troisieme Slide -->
+    				<div id=carousel3>
+    					<div class="image">
+    						<img src="images/image3.png" alt="image_3</div>">
+    					</div>
+
+    					<div class=text_image>
+		    				<h2>2 : Réservez !</h2>
+							<p>Vous êtes sûr d'avoir fait le bon choix de station ?<br/>
+							 Bien, il ne vous reste plus qu'à cliquer sur Réserver.</p>
+		    			</div>
+		    		</div>
+    			</div>
+    		</div>
+    	</section>
+
+    	<section id="carte_et_stations">
+
+    		<div id="map"></div>
+    		<div id=formulaire>
+    			<form method=post action=traitement>
+
+    				<p id ="Nom"><input  type="text" name="Nom" placeholder="Nom : " /></p>
+    				<p id="Prenom" "><input  type="text" name="Prenom" placeholder="Prenom : " /></p>
+
+    				<p class="buttonform"><input type="submit" value="Envoyer"/></p>
+    			</form>
+    			<h1>Details de la station</h1>
+    		</div>
+
+
+    	</section>
+    	<footer id="footer">
+    		<div id="contact">
+    			<h3 class="contact">Nous contacter</h3>
+    			<p>Du lundi au samedi de 8h à 18h</p>
+    			
+    		</div>
+    		
+    	</footer>
+
+    	<script src="main.js"></script>
+
+    </body>
+</html>
