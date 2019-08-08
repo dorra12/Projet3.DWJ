@@ -1,0 +1,40 @@
+body {
+ 	margin:0; padding:0; }
+ 	.mapZone{
+ 		
+ 		margin-top: 60px;
+ 		margin-left: 20%;
+ 	width: 800px;
+ 	height: 500px;
+ 	position:relative;
+ 	}
+
+.mapZone #map { 
+ 
+	position:absolute; 
+	 top: 0; bottom:0; width: 800px;
+ 	height: 500px; }
+
+
+/*image*/
+/*
+body #diaporama-slider{
+	border:solid red;
+	width: 50%;
+	margin-left: 20%;
+	 overflow:hidden;
+	
+}
+.conteneur{
+	border: solid blue;
+	
+	display:flex;
+}
+.image img{
+	width:650px;
+	height:400px;
+
+}
+
+*/
+
