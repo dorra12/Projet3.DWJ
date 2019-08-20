@@ -1,16 +1,51 @@
 
+
+
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiZG9ycmFhIiwiYSI6ImNqeXN3OGFidjAwZWozY3A5MmtjNWlkcm0ifQ.VXkf7Qy-fB0mUZXUoldzZg';
 
+class StationVelo {
+	constructor(nameJCD,adressJCD,latJCD,lngJCD,bikeStandsJCD,availableBikeStandsJCD,availableBikesJCD,statusJCD){
+		this.name = nameJCD;
+		this.adress = adressJCD;
+		this.position = {
+			lat : latJCD,
+			lng : lngJCD
+		};
+		//this.position.lat = latJCD;
+		//this.position.lng = lngJCD;
+		this.bikeStands = bikeStandsJCD;
+		this.availableBikeStands = availableBikeStandsJCD;
+		this.availableBikes = availableBikesJCD;
+		this.status = statusJCD;
+	}
+}
 
+
+class Marqueur {
+	constructor(lng,lat,description){
+		this.type = 'Feature';
+		//this.geometry.type = 'Point';
+		this.geometry = {
+			coordinates : [lng,lat],
+			type : 'Point'
+		};
+		//this.geometry.coordinates = [lng,lat];
+		this.properties ={
+			title : 'Mapbox',
+			description : description
+		};
+		//this.properties.title = 'Mapbox';
+		//this.properties.description =description;
+	}
+}
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
     zoom: 12,
     center: [6.145533, 49.601652]
-
 });
-
-var tableauDorra = [];
+var tableauMarqueur = [];
 
     /* Appel API JC Decaux*/
 var requestURL = 'https://api.jcdecaux.com/vls/v1/stations?apiKey=aa3a65607bf4370c3f1bc3071632214156880476&contract=luxembourg';
@@ -26,22 +61,12 @@ request.send();
 
 request.onload = function() {
   var tableauStations = request.response;
-    
   tableauStations.forEach(function(station){
-    let lat = station.position.lat;
-    let lng = station.position.lng;
-    let tableauCoordinates = [lng, lat];
-    let geometryTemp = { 
-      type : "Point",
-      coordinates :tableauCoordinates
-    };
-    let stationDest ={
-      type : 'Feature',
-      properties: {},
-      geometry: geometryTemp
-    };
-    //placer stationDest dans tableauDorra
-    tableauDorra.push(stationDest);
+  	var myStation = new StationVelo(station.name,station.address,station.position.lat,station.position.lng,station.bike_stands,station.available_bike_stands,station.available_bikes,station.status);
+  	/*instantiation objet marqueur avec les infos de la station en cours*/
+  	var myMarqueur = new Marqueur (station.position.lng,station.position.lat,station.name);
+  	//placer myMarqueur dans tableauMarquer
+    tableauMarqueur.push(myMarqueur);
   })
 
 }
@@ -60,7 +85,7 @@ map.on("load", function() {
 				type: "geojson",
 				data: {
 					type: 'FeatureCollection',
-					features : tableauDorra
+					features : tableauMarqueur
 				}
 			},
 			layout: {
@@ -69,32 +94,6 @@ map.on("load", function() {
 		});
 	});
 });
-
-
-
-class StationDest {
-	constructor(lng,lat){
-		this.type = "Feature";
-		this.properties = "";
-		this.geometry.type = "Point";
-		this.geometry.coordinates = [lng,lat];
-
-	}
-
-	setCoordinates(lng,lat){
-		this.geometry.coordinates[0] = lng;
-		this.geometry.coordinates[1] = lat;
-	}
-}
-
-//let newStation = new StationDest(-77.8091, 37.291);
-
-
-
-
-
-
-
 
 
 
