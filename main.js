@@ -70,6 +70,7 @@ myMap.tabMarqueur.forEach(function(marqueur){
    var el = document.createElement('div');
    el.className = 'marker';
    // make a marker for each feature and add it to the map
+	console.log(marqueur.coordinate);
    new mapboxgl.Marker(el)
        .setLngLat(marqueur.coordinates)
        .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
