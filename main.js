@@ -1,8 +1,5 @@
-
-
-
-//mapboxgl.accessToken = 'pk.eyJ1IjoiZG9ycmFhIiwiYSI6ImNqeXN3OGFidjAwZWozY3A5MmtjNWlkcm0ifQ.VXkf7Qy-fB0mUZXUoldzZg';
-mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZG9ycmFhIiwiYSI6ImNqeXN3OGFidjAwZWozY3A5MmtjNWlkcm0ifQ.VXkf7Qy-fB0mUZXUoldzZg';
+//mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg';
 
 class StationVelo {
 	constructor(stationJCD){
@@ -23,14 +20,14 @@ class StationVelo {
 }
 class Marqueur {
 	constructor(stationJCD){
-		this.coordinates : [stationJCD.position.lng,stationJCD.position.lat],
+		this.coordinates = [stationJCD.position.lng,stationJCD.position.lat];
 		this.station = new StationVelo(stationJCD);
 	}
 }
 
 class MapLuxembourg {
 	constructor(){
-		this.tabMarqueur : [];
+		this.tabMarqueur = [];
 	}
 	addMarqueur (stationJCD){
 		var marqueur= new Marqueur(stationJCD);
@@ -79,3 +76,4 @@ myMap.tabMarqueur.forEach(function(marqueur){
            .setHTML('<h3>' + marqueur.station.name + '</h3><p>' + marqueur.station.decrire() + '</p>'))
        .addTo(map);
    });
+
