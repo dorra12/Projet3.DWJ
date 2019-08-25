@@ -50,35 +50,34 @@ request.responseType = 'json';
   /*envoie  requete*/
 request.send();
   /*onload :*/
-request.onload = function() {
-	var stationsJCD = request.response;
-	stationsJCD.forEach(function (stationJCD){	
-		myMap.addMarqueur(stationJCD);
-		console.log('MAP IN:' + myMap);
-	})
-}
-
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
     zoom: 12,
     center: [6.145533, 49.601652]
 });
-// add markers to map
-console.log('MYMAP1 :' + myMap[1]);
-console.log('MAP :' + myMap);
-myMap.tabMarqueur.forEach(function(marqueur){	
-   // create a HTML element for each feature
-   var el = document.createElement('div');
-   el.className = 'marker';
-   // make a marker for each feature and add it to the map
+
+request.onload = function() {
+	var stationsJCD = request.response;
+	stationsJCD.forEach(function (stationJCD){	
+		myMap.addMarqueur(stationJCD);
+		console.log('MAP IN:' + myMap);
+	})
+	
+	// add markers to map
+	myMap.tabMarqueur.forEach(function(marqueur){	
+   	// create a HTML element for each feature
+   	var el = document.createElement('div');
+   	el.className = 'marker';
+   	// make a marker for each feature and add it to the map
 	console.log('marqueur :' + marqueur.coordinates);
 	console.log('name :' + marqueur.station.name );
-	onsole.log('desc :' + marqueur.station.decrire() );
-   new mapboxgl.Marker(el)
-       .setLngLat(marqueur.coordinates)
-       .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
-           .setHTML('<h3>' + marqueur.station.name + '</h3><p>' + marqueur.station.decrire() + '</p>'))
-       .addTo(map);
-   });
+	Console.log('desc :' + marqueur.station.decrire() );
+   	new mapboxgl.Marker(el).setLngLat(marqueur.coordinates).setPopup(new mapboxgl.Popup({offset: 25}) // add popups
+		.setHTML('<h3>' + marqueur.station.name + '</h3><p>' + marqueur.station.decrire() + '</p>'))
+		.addTo(map);
+   	});
+}
+
+
 
