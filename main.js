@@ -52,13 +52,12 @@ request.send();
   /*onload :*/
 request.onload = function() {
 	var stationsJCD = request.response;
-	console.log(stationsJCD);
 	stationsJCD.forEach(function (stationJCD){	
 		myMap.addMarqueur(stationJCD);
 	})
 }
  
-console.log(myMap);
+console.log(myMap.tabMarqueur);
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
