@@ -66,6 +66,7 @@ var map = new mapboxgl.Map({
 // add markers to map
 console.log('MYMAP1 :' + myMap[1]);
 console.log('MAP :' + myMap);
+console.log('MAPÉ :' + myMap);
 myMap.tabMarqueur.forEach(function(marqueur){	
    // create a HTML element for each feature
    var el = document.createElement('div');
