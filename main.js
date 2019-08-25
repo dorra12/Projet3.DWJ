@@ -61,7 +61,6 @@ request.onload = function() {
 	var stationsJCD = request.response;
 	stationsJCD.forEach(function (stationJCD){	
 		myMap.addMarqueur(stationJCD);
-		console.log('MAP IN:' + myMap);
 	})
 	
 	// add markers to map
@@ -70,9 +69,6 @@ request.onload = function() {
    	var el = document.createElement('div');
    	el.className = 'marker';
    	// make a marker for each feature and add it to the map
-	console.log('marqueur :' + marqueur.coordinates);
-	console.log('name :' + marqueur.station.name );
-	Console.log('desc :' + marqueur.station.decrire() );
    	new mapboxgl.Marker(el).setLngLat(marqueur.coordinates).setPopup(new mapboxgl.Popup({offset: 25}) // add popups
 		.setHTML('<h3>' + marqueur.station.name + '</h3><p>' + marqueur.station.decrire() + '</p>'))
 		.addTo(map);
