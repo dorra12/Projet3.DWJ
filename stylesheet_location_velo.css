@@ -15,7 +15,7 @@ body {
 	 top: 0; bottom:0; width: 800px;
  	height: 500px; }
 
-.marker #map  {
+.marker  {
   background-image: url("map-marker.png");
   background-size: cover;
   width: 50px;
