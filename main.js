@@ -1,51 +1,46 @@
 
 
 
-
-mapboxgl.accessToken = 'pk.eyJ1IjoiZG9ycmFhIiwiYSI6ImNqeXN3OGFidjAwZWozY3A5MmtjNWlkcm0ifQ.VXkf7Qy-fB0mUZXUoldzZg';
+//mapboxgl.accessToken = 'pk.eyJ1IjoiZG9ycmFhIiwiYSI6ImNqeXN3OGFidjAwZWozY3A5MmtjNWlkcm0ifQ.VXkf7Qy-fB0mUZXUoldzZg';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg';
 
 class StationVelo {
-	constructor(nameJCD,adressJCD,latJCD,lngJCD,bikeStandsJCD,availableBikeStandsJCD,availableBikesJCD,statusJCD){
-		this.name = nameJCD;
-		this.adress = adressJCD;
-		this.position = {
-			lat : latJCD,
-			lng : lngJCD
-		};
+	constructor(stationJCD){
+		this.name = stationJCD.name;
+		this.address = stationJCD.address;
 		//this.position.lat = latJCD;
 		//this.position.lng = lngJCD;
-		this.bikeStands = bikeStandsJCD;
-		this.availableBikeStands = availableBikeStandsJCD;
-		this.availableBikes = availableBikesJCD;
-		this.status = statusJCD;
+		this.bikeStands = stationJCD.bike_stands;
+		this.availableBikeStands = stationJCD.available_bike_stands;
+		this.availableBikes = stationJCD.available_bikesJCD;
+		this.status = stationJCD.status;
+	} 
+	decrire (){
+		var descriptif;
+		descriptif =(this.address + ' ' + this.bikeStands + ' ' +this.availableBikeStands + ' ' + this.availableBikes + ' '  + this.status);
+		return descriptif;
 	}
 }
-
-
 class Marqueur {
-	constructor(lng,lat,description){
-		this.type = 'Feature';
-		//this.geometry.type = 'Point';
-		this.geometry = {
-			coordinates : [lng,lat],
-			type : 'Point'
-		};
-		//this.geometry.coordinates = [lng,lat];
-		this.properties ={
-			title : 'Mapbox',
-			description : description
-		};
-		//this.properties.title = 'Mapbox';
-		//this.properties.description =description;
+	constructor(stationJCD){
+		this.coordinates : [stationJCD.position.lng,stationJCD.position.lat],
+		this.station = new StationVelo(stationJCD);
 	}
 }
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
-    zoom: 12,
-    center: [6.145533, 49.601652]
-});
-var tableauMarqueur = [];
+
+class MapLuxembourg {
+	constructor(){
+		this.tabMarqueur : [];
+	}
+	addMarqueur (stationJCD){
+		var marqueur= new Marqueur(stationJCD);
+		this.tabMarqueur.push(marqueur);
+
+	};
+}
+
+
+var myMap = new MapLuxembourg();
 
     /* Appel API JC Decaux*/
 var requestURL = 'https://api.jcdecaux.com/vls/v1/stations?apiKey=aa3a65607bf4370c3f1bc3071632214156880476&contract=luxembourg';
@@ -58,42 +53,29 @@ request.responseType = 'json';
   /*envoie  requete*/
 request.send();
   /*onload :*/
-
 request.onload = function() {
-  var tableauStations = request.response;
-  tableauStations.forEach(function(station){
-  	var myStation = new StationVelo(station.name,station.address,station.position.lat,station.position.lng,station.bike_stands,station.available_bike_stands,station.available_bikes,station.status);
-  	/*instantiation objet marqueur avec les infos de la station en cours*/
-  	var myMarqueur = new Marqueur (station.position.lng,station.position.lat,station.name);
-  	//placer myMarqueur dans tableauMarquer
-    tableauMarqueur.push(myMarqueur);
-  })
-
+	var stationsJCD = request.response;
+	stationsJCD.forEach(function (stationJCD){	
+		myMap.addMarqueur(stationJCD);
+	})
 }
-  
-map.on("load", function() {
-	/* Image: An image is loaded and added to the map. */
-	map.loadImage("https://i.imgur.com/MK4NUzI.png",function(error, image){
-		if (error) throw error;
-		map.addImage("custom-marker", image);
-		/* Style layer: A style layer ties together the source and image and specifies how they are displayed on the map. */
-		map.addLayer({
-			id: "markers",
-			type: "symbol",
-			/* Source: A data source specifies the geographic coordinate where the image marker gets placed. */
-			source: {
-				type: "geojson",
-				data: {
-					type: 'FeatureCollection',
-					features : tableauMarqueur
-				}
-			},
-			layout: {
-				"icon-image": "custom-marker",
-			}
-		});
-	});
+ 
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    zoom: 12,
+    center: [6.145533, 49.601652]
 });
-
-
-
+// add markers to map
+myMap.tabMarqueur.forEach(function(marqueur){	
+   // create a HTML element for each feature
+   var el = document.createElement('div');
+   el.className = 'marker';
+   // make a marker for each feature and add it to the map
+   new mapboxgl.Marker(el)
+       .setLngLat(marqueur.coordinates)
+       .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
+           .setHTML('<h3>' + marqueur.station.name + '</h3><p>' + marqueur.station.decrire() + '</p>'))
+       .addTo(map);
+   });
