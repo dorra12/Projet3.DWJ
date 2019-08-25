@@ -56,8 +56,7 @@ request.onload = function() {
 		myMap.addMarqueur(stationJCD);
 	})
 }
- 
-console.log(myMap.tabMarqueur);
+
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
@@ -70,7 +69,9 @@ myMap.tabMarqueur.forEach(function(marqueur){
    var el = document.createElement('div');
    el.className = 'marker';
    // make a marker for each feature and add it to the map
-	console.log(marqueur.coordinate);
+	console.log('marqueur :' + marqueur.coordinates);
+	console.log('name :' + marqueur.station.name );
+	onsole.log('desc :' + marqueur.station.decrire() );
    new mapboxgl.Marker(el)
        .setLngLat(marqueur.coordinates)
        .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
