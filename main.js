@@ -1,6 +1,30 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZG9ycmFhIiwiYSI6ImNqeXN3OGFidjAwZWozY3A5MmtjNWlkcm0ifQ.VXkf7Qy-fB0mUZXUoldzZg';
 //mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg';
 
+$(".conteneur > div:eq(0)").show();
+$(".conteneur > div:eq(1)").hide();
+$(".conteneur > div:eq(2)").hide();
+
+var position = 0;
+
+setInterval(function(){
+	
+
+	var str = ".conteneur > div:eq(" + String(position) + ")";
+	$(str).fadeOut();
+	if (position < 2){
+		position ++;
+	}
+	else{
+		position = 0;
+	}
+	var str = ".conteneur > div:eq(" + String(position) + ")";
+	$(str).fadeIn();
+
+},3000);
+
+
+
 class StationVelo {
 	constructor(stationJCD){
 		this.name = stationJCD.name;
@@ -12,11 +36,11 @@ class StationVelo {
 		this.availableBikes = stationJCD.available_bikesJCD;
 		this.status = stationJCD.status;
 	} 
-	decrire (){
+	/*decrire (){
 		var descriptif;
 		descriptif =(this.address + ' ' + this.bikeStands + ' ' +this.availableBikeStands + ' ' + this.availableBikes + ' '  + this.status);
 		return descriptif;
-	}
+	}*/
 }
 class Marqueur {
 	constructor(stationJCD){
@@ -53,7 +77,7 @@ request.send();
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
-    zoom: 12,
+    zoom: 13,
     center: [6.145533, 49.601652]
 });
 
@@ -68,14 +92,27 @@ request.onload = function() {
    	// create a HTML element for each feature
    	var el = document.createElement('div');
    	el.className = 'marker';
-		console.log('xy' + marqueur.coordinates);
-		console.log('name' + marqueur.station.name);
    	// make a marker for each feature and add it to the map
    	new mapboxgl.Marker(el).setLngLat(marqueur.coordinates).setPopup(new mapboxgl.Popup({offset: 25}) // add popups
-		.setHTML('<h3>' + marqueur.station.name + '</h3><p>' + marqueur.station.decrire() + '</p>'))
+		.setHTML('<h3>' + marqueur.station.name + '</h3><p>' + marqueur.station.address + '</br>' + marqueur.station.status + '</p>'))
 		.addTo(map);
    	});
 }
 
+/////////////////////////////////////////////
+///Creation objet 
+
+
+class Personne {
+	constructor (nom, prenom){
+		this.nom = nom;
+		this.prenom = prenom;	
+	}
+	validation(){
+		
+
+	}
+
+}
 
 
