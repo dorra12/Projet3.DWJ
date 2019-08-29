@@ -1,49 +1,110 @@
 body {
  	margin:0; padding:0; }
- 	.mapZone{
- 		
- 		margin-top: 60px;
- 		margin-left: 20%;
- 	width: 800px;
- 	height: 500px;
- 	position:relative;
+
+header
+{
+display : flex;
+justify-content: space-around;
+align-items: center;
+background-color: white;
+position: fixed;
+top :0;
+left: 0;
+right: 0;
+width: 100%;
+z-index: 10;
+height: 100px;
+}
+  /*navigation*/
+.expandable
+{
+list-style-type: none;
+display : flex;
+justify-content: space-around;
+padding: 0;
+width: 300px;  	
+}
+.menu a
+{
+text-decoration: none;
+color:#6e6e6e;
+font-size: 18px;
+padding-top: 30px;
+}
+.menu li :hover
+{
+color:  #5cadd3;
+}
+
+#content
+{
+margin-top: 200px;
+}
+
+
+.mapZone
+{
+	position: relative;
+	width: 60%; 
+	height: 600px;
+	border :solid red;
+
+}
+
+ .mapZone #map { 
+	position: absolute;
+width: 100%; 
+	height: 100%;
  	}
+.mapLuxembourg{
+	display: flex;
+}
+.infos_station{
+	border:solid black;
+	text-align: center;
+	height: 300px;
+	width: 300px;
+	margin: auto;
+}
 
-.mapZone #map { 
- 
-	position:absolute; 
-	 top: 0; bottom:0; width: 800px;
- 	height: 500px; }
-
-.marker  {
-  background-image: url("map-marker.png");
+.marker   {
+  background-image: url("https://i.imgur.com/MK4NUzI.png");
   background-size: cover;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
 }
+.mapboxgl-popup {
+  max-width: 200px;
+}
 
+.mapboxgl-popup-content {
+  text-align: left;
+  font-family: 'Open Sans', sans-serif;
+  width: 160px;
+  background-color: blue;
 
-/*image*/
-/*
-body #diaporama-slider{
-	border:solid red;
-	width: 50%;
-	margin-left: 20%;
-	 overflow:hidden;
+  border-radius: 6px;
+  padding: 8px 0;
+ 
+}
+
+.image{
+	border:solid blue;
+	position: relative;
+	z-index: 1;
+	margin: auto;
+	width: 75%;
+}
+.image img{ width: 100%; }
+.text_image{
+	width: 75%;
+	margin:auto;
+	text-align: center;
+	margin-bottom: 80px;
 	
 }
-.conteneur{
-	border: solid blue;
-	
-	display:flex;
+#formulaire{
+	display: none;
 }
-.image img{
-	width:650px;
-	height:400px;
-
-}
-
-*/
-
