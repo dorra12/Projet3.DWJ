@@ -1,5 +1,8 @@
 body {
- 	margin:0; padding:0; }
+ 	margin:0; padding:0;
+ 	font-family: Verdana, sans-serif; }
+
+
 
 header
 {
@@ -26,38 +29,36 @@ width: 300px;
 }
 .menu a
 {
-text-decoration: none;
-color:#6e6e6e;
-font-size: 18px;
-padding-top: 30px;
+	text-decoration: none;
+	color:#6e6e6e;
+	font-size: 18px;
+	padding-top: 30px;
 }
 .menu li :hover
 {
-color:  #5cadd3;
+	color:  #5cadd3;
 }
 
 #content
 {
-margin-top: 200px;
+	margin-top: 200px;
 }
 
 
 .mapZone
-{
-	position: relative;
+{	position: relative;
 	width: 60%; 
 	height: 600px;
 	border :solid red;
-
 }
-
- .mapZone #map { 
+  #map { 
 	position: absolute;
-width: 100%; 
+	width: 100%; 
 	height: 100%;
  	}
 .mapLuxembourg{
 	display: flex;
+	margin-top: 200px;
 }
 .infos_station{
 	border:solid black;
@@ -66,45 +67,66 @@ width: 100%;
 	width: 300px;
 	margin: auto;
 }
-
 .marker   {
-  background-image: url("https://i.imgur.com/MK4NUzI.png");
-  background-size: cover;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
+  	background-image: url("https://i.imgur.com/MK4NUzI.png");
+  	background-size: cover;
+  	width: 30px;
+  	height: 30px;
+  	border-radius: 50%;
+  	cursor: pointer;
 }
 .mapboxgl-popup {
-  max-width: 200px;
+  	max-width: 200px;
 }
-
 .mapboxgl-popup-content {
-  text-align: left;
-  font-family: 'Open Sans', sans-serif;
-  width: 160px;
-  background-color: blue;
-
-  border-radius: 6px;
-  padding: 8px 0;
- 
+  	text-align: left;
+  	font-family: 'Open Sans', sans-serif;
+  	width: 160px;
+	background-color: blue;
+  	border-radius: 6px;
+  	padding: 8px 0;
 }
 
-.image{
-	border:solid blue;
+
+.mySlides 
+{	display: none;}
+img 
+{	vertical-align: middle;
+	width: 100%;
+
+}
+/* Slideshow container */
+.slideshow-container {
+	width: 80%;
 	position: relative;
-	z-index: 1;
 	margin: auto;
-	width: 75%;
 }
-.image img{ width: 100%; }
-.text_image{
-	width: 75%;
+.text {
+	border :solid red;
+  	color: black;
+  	font-size: 12px;
+  	position: absolute;
+  	bottom: 0px;
+  	width: 100%;
+  	text-align: center;
+}
+.fas {
+	font-size: 40px;
+}
+.fas:hover{
+color: grey;
+}
+#bouton{
+	padding-top: 50px;
 	margin:auto;
-	text-align: center;
-	margin-bottom: 80px;
-	
+	width: 120px;
 }
+
+
 #formulaire{
 	display: none;
 }
+
+
+
+
