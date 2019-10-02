@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="stylesheet_location_velo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="VeloCityLuxembourg, application de location en ligne de vélo au Luxembourg" />
-    <link rel="icon" type="image/png" href="images/logo_velo.png" />
 
     <!--lien API MAP-->
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js'></script>
@@ -105,8 +104,16 @@
         </section>
         <!--Balise MAPBox-->
         <div class="mapLuxembourg">
-            <div class="mapZone">
+            <div id="mapZone">
                 <div id='map'></div>
+            </div>
+        </div>
+        <div id="station_non_reservable">
+            <p> Vous ne pouvez pas reserver car il n'y a pas de vélo disponible! </p>
+        </div>
+        <section id="formulaire">
+            <div class="initText">
+                <i class="fas fa-angle-double-up"></i> Cliquez sur la station de votre choix
             </div>
             <div class="infos_station">
                 <h2>Détails de la station </h2>
@@ -117,14 +124,6 @@
                 <p id="buttonform"><input type="submit" value="Reserver" /></p>
             </div>
 
-        </div>
-        <div id="station_non_reservable">
-            <p> Vous ne pouvez pas reserver car il n'y a pas de vélo disponible </p>
-        </div>
-        <section id="formulaire">
-
-
-
             <form id=form_reserver>
                 <div class="infos_utilisateur">
                     <div class="infos_ut">
@@ -132,7 +131,6 @@
                         <p id="prenom">
                             <label for="prenom">Votre Prenom</label>
                             <input type="text" name="Prenom" placeholder="Prenom " id="filed1" maxlength="20" required/></p>
-
                         <p id="nom">
                             <label for="nom">Votre Nom</label>
                             <input type="text" name="Nom" placeholder="Nom " id="filed2" maxlength="20" required/></p>
@@ -141,10 +139,9 @@
                     <div class="buttonformulaire">
                         <h2>Signature</h2>
                         <canvas id="myCanvas" width="200" height="100"></canvas>
-                        <p class="boutonS"><input id="reserver" type="submit" value="Valider" /></p>
-                        <p class="boutonS"><input id="affacer" value="Effacer" /></p>
+                        <p class="boutonS"><input id="valider" type="submit" value="Valider" /></p>
+                        <p class="boutonS"><input id="affacer" type="submit" value="Effacer" /></p>
                     </div>
-
                 </div>
             </form>
 
@@ -154,15 +151,13 @@
 
             <div id="timer">
                 <p id="reservation_text"></p>
-                <p id="timertext">temps Restant</p>
-                <button id="timerButton">Start Timer</button>
+                <p id="timertext"></p>
+
                 <input type="button" id="bouton_annuler" value="Annuler ma réservation">
             </div>
         </section>
+
     </header>
-
-
-
 
     <footer id="footer">
         <div id="contact">
@@ -175,10 +170,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="Diaporama.js"></script>
-    <script src="StationVelo .js"></script>
+    <script src="StationVelo.js"></script>
     <script src="marqueur.js"></script>
     <script src="mapLuxembourg.js"></script>
     <script src="JCDecauxConnector.js"></script>
+    <script src="Timer.js"></script>
+    <script src="InitReservation.js"></script>
     <script src="main.js"></script>
     </div>
 </body>
