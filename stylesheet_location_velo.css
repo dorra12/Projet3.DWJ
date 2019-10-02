@@ -210,9 +210,10 @@
             margin-top: 200px;
         }
         
-        .mapZone {
+        #mapZone {
             position: relative;
-            width: 60%;
+            width: 90%;
+            margin: auto;
             height: 600px;
         }
         
@@ -223,22 +224,28 @@
         }
         
         .mapLuxembourg {
-            display: flex;
+            /*display: flex;*/
             margin-top: 200px;
         }
         
+        .initText {
+            border: solid grey;
+            margin: auto;
+            font-size: 40px;
+        }
+        
         .infos_station {
-            height: 350px;
-            max-width: 500px;
-            width: 300px;
+            display: none;
+            width: 290px;
             margin: auto;
             background: var( --second-color);
             font-weight: bold;
             text-align: center;
+            background-image: radial-gradient(ellipse at center, white, lightgrey);
         }
         
         .infos_station h2 {
-            font-size: 25px;
+            font-size: 20px;
             text-align: center;
             margin: 30px;
         }
@@ -246,8 +253,8 @@
         .marker {
             background-image: url("Images/téléchargement.png");
             background-size: cover;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
         }
@@ -275,7 +282,7 @@
         }
         
         .slideshow-container {
-            width: 90%;
+            width: 80%;
             margin: auto;
         }
         
@@ -316,14 +323,14 @@
         }
         
         #form_reserver {
-            width: 80%;
+            width: 60%;
             min-width: 200px;
             height: 300px;
             margin: auto;
             margin-top: 20px;
             background-color: lightgray;
             border: solid gray;
-            max-width: 900px;
+            max-width: 700px;
             display: none;
             margin-top: 50px;
         }
@@ -356,6 +363,29 @@
         .infos_utilisateur h2 {
             font-weight: bold;
             margin: 20px auto;
+        }
+        
+        #bouton_annuler {
+            display: none;
+        }
+        
+        #timer {
+            background-color: rgb(56, 145, 56);
+            width: 60%;
+            margin: auto;
+            text-align: center;
+        }
+        
+        #buttonform,
+        #station_non_reservable {
+            display: none;
+            text-align: center;
+            margin: 30px;
+        }
+        
+        #formulaire {
+            display: flex;
+            margin-top: 50px;
         }
         
         .buttonformulaire {
