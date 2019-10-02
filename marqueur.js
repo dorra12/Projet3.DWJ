@@ -5,6 +5,8 @@ class Marqueur {
         this.nonReservable = document.getElementById("station_non_reservable");
         this.buttonform = document.getElementById("buttonform");
         this.marqueurCible = document.getElementsByClassName("marker");
+        this.infoStation = document.getElementsByClassName("infos_station")[0];
+        this.window = document.getElementById("form_reserver");
     }
     colorStatus() {
 
@@ -15,6 +17,7 @@ class Marqueur {
     nonResa() {
 
         if (this.station.availableBikes == 0) {
+            this.window.style.display = "none";
             this.nonReservable.style.display = "block";
             this.buttonform.style.display = "none"
         } else {
@@ -34,4 +37,8 @@ class Marqueur {
         }
         return imgMarker;
     }
+    stylechange() {
+        this.infoStation.style.height = '100%';
+    }
+
 }
