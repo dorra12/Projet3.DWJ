@@ -81,7 +81,6 @@ dddddd.addEventListener("click", function() {
     // instantier la class de Timer + stocker(sessionStorage)*/
     var counterTimer = new Timer(20);
     counterTimer.startCounter();
-    //counterTimer.startCounter();
 
     //stocker (sessionStorage) station Vélos actuelle
     currentStationValid = sessionStorage.getItem('StationStorage');
@@ -97,12 +96,12 @@ dddddd.addEventListener("click", function() {
 })
 
 // verification reservation en cours
-if (sessionStorage.getItem("storageName")) {
+if (sessionStorage.getItem("counterStorage")) {
 
     var time = sessionStorage.getItem("counterStorage");
     document.getElementsByClassName('initText')[0].style.display = "none";
     var counterTimer = new Timer(time);
     counterTimer.startCounter();
-    //counterTimer.startCounter();
-    document.getElementById("reservation_text").textContent = "Vélo reservé à la station :" + " " + sessionStorage.getItem("StationStorage").address + " par " + sessionStorage.getItem("storageName") + " " + sessionStorage.getItem("storageFirstName");
+
+    document.getElementById("reservation_text").textContent = "Vélo reservé à la station :" + " " + JSON.parse(sessionStorage.getItem("StationStorage")).address + " par " + sessionStorage.getItem("storageName") + " " + sessionStorage.getItem("storageFirstName");
 }
