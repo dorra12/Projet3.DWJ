@@ -6,7 +6,6 @@ class Timer {
         this.afficheur;
     }
     countDown() {
-
         if (this.counter > 0) {
             this.counter -= 1;
             this.afficheur = sessionStorage.setItem("counterStorage", this.counter);
@@ -19,12 +18,12 @@ class Timer {
             this.timerText.textContent = "Temps restant avant l'expiration de la réservation " + tempsCounter;
         } else {
             clearInterval(this.interval);
-            sessionStorage.clear();
+            sessionStorage.removeItem("counterStorage");
             this.timerText.textContent = "temps écoulé"
         }
     }
     startCounter() {
-
+        sessionStorage.setItem("counterStorage", this.counter);
         this.interval = setInterval(this.countDown.bind(this), 1000);
 
     }
