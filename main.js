@@ -97,7 +97,6 @@ dddddd.addEventListener("click", function() {
 
 // verification reservation en cours
 if (sessionStorage.getItem("counterStorage")) {
-
     var time = sessionStorage.getItem("counterStorage");
     document.getElementsByClassName('initText')[0].style.display = "none";
     var counterTimer = new Timer(time);
