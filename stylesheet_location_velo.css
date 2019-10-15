@@ -219,7 +219,7 @@ body {
 /*****************************/
 
 .initText p {
-    margin: auto;
+    margin: 20px auto;
     font-size: 40px;
     width: 90%;
     align-content: center;
@@ -311,7 +311,6 @@ img {
 #myCanvas {
     border: 1px solid rgb(117, 117, 117);
     background-color: #fff;
-    border: solid blue
 }
 
 #form_reserver {
@@ -323,20 +322,18 @@ img {
     /* max-width: 700px;*/
     display: none;
     margin-top: 50px;
-    border: solid green;
 }
 
 .infos_ut {
     width: 50%;
     display: flex;
     flex-direction: column;
-    border: solid red;
 }
 
 .infos_ut input {
     border: 1px solid rgb(180, 180, 180);
     display: block;
-    
+    margin: 10px 15px;
     height: 40px;
     border-radius: 0px;
     padding-left: 8px;
@@ -355,7 +352,6 @@ img {
     display: none;
 }
 
-#buttonform,
 #station_non_reservable {
     display: none;
     text-align: center;
@@ -371,35 +367,26 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid orange;
 }
 
-input {
+.boutonS input {
     display: inline-block;
     border: none;
     transition: opacity 1s ease-in-out;
     border-radius: 10px;
     text-decoration: none;
-    border: solid yellow;
-   
+    margin: 10px;
+    padding: 5px 2px;
 }
 
 input:hover {
     opacity: 0.5;
 }
 
-#reserver {
-    background: var(--primary-color);
-    color: #fff;
-    margin: 10px;
-    padding: 3px 2px;
-}
-
 #affacer {
     background-color: rgb(49, 47, 47);
     color: #fff;
-     margin: 10px;
-    padding: 3px 2px;
+}
 
 #timer {
     background-color: rgb(56, 145, 56);
