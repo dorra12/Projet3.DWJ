@@ -381,8 +381,7 @@ input {
     border-radius: 10px;
     text-decoration: none;
     border: solid yellow;
-    margin: 10px;
-    padding: 3px 2px;
+   
 }
 
 input:hover {
@@ -392,14 +391,15 @@ input:hover {
 #reserver {
     background: var(--primary-color);
     color: #fff;
-    padding: 0.20rem 2rem;
+    margin: 10px;
+    padding: 3px 2px;
 }
 
 #affacer {
     background-color: rgb(49, 47, 47);
     color: #fff;
-    padding: 0.20rem 2rem;
-}
+     margin: 10px;
+    padding: 3px 2px;
 
 #timer {
     background-color: rgb(56, 145, 56);
