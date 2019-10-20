@@ -73,7 +73,7 @@ ddd.init();
 
 var dddddd = document.getElementById("valider");
 dddddd.addEventListener("click", function() {
-
+ddd.initTouchEvent();
     document.getElementsByClassName("infos_station")[0].style.display = 'none';
     ddd.window.style.display = 'none';
 
