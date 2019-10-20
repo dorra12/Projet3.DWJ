@@ -1,197 +1,105 @@
-<!DOCTYPE html>
-<html lang="fr">
+var carrousel = new Diaporama("mySlides");
+carrousel.demarrer();
 
-<head>
-    <meta charset="utf-8" />
-    <title>Site de réservation de Vélos en ligne au Luxembourg</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+document.getElementById("precedent").addEventListener("click", function() {
+    carrousel.afficherAuClick(event);
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="VeloCityLuxembourg, application de location en ligne de vélo au Luxembourg" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="stylesheet_location_velo.css">
-    <!--lien API MAP-->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css' rel='stylesheet' />
-    <!--<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/leaflet.markercluster.js'></script>-->
-    <!--<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.css' rel='stylesheet' />-->
-    <!--<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.Default.css' rel='stylesheet' />-->
-    <!--lien API MAP-->
+});
+document.getElementById("suivant").addEventListener("click", function() {
+    carrousel.afficherAuClick(event)
+});
+document.getElementById("bouton_pause").addEventListener("click", function() {
+    clearInterval(carrousel.interval);
+});
+document.getElementById("bouton_play").addEventListener("click", function() {
+    clearInterval(carrousel.interval);
+    //clic ++ fois sur play => on fat appel a l'evennement stop pour reprendre un nouvel interval.
+    carrousel.demarrer();
+});
 
-    <!-- favicon -->
-    <script src="https://kit.fontawesome.com/7675129fd2.js"></script>
+document.addEventListener("keyup", function() {
+    carrousel.infosClavier(event);
+});
 
+var stationConnector = new JCDecauxConnector();
+stationConnector.sendRequest();
+var myMap = new MapLuxembourg();
 
-    <!-- Google Fonts -->
+stationConnector.request.onload = function() {
 
-    <!-- Description-->
-    <meta name="description" content="VeloCityLuxembourg, application de location en ligne de vélo au Luxembourg" />
-    <meta name="keywords" content="application, velo, vélo, Luxembourg" />
-    <meta name="author" content="Dorra" />
-</head>
+    var stationsJCD = stationConnector.request.response;
+    stationsJCD.forEach(function(stationJCD) {
+        myMap.addMarqueur(stationJCD);
 
-<body>
-    <div class="menu-wrap">
-        <input type="checkbox" class="toggler">
-        <div class="hamburger">
-            <div></div>
-        </div>
-        <!-- Barre de navigation -->
-        <nav class="menu">
-            <div>
-                <div>
-                    <ul class="expandable">
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#diaporama">Carte</a></li>
-                        <li><a href="#footer">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <div class="showcase">
-        <header class="container text-center">
-            <h2>Bienvenue sur notre site.</h2>
-            <p>Disponible 24h/24 et 7j/7 vel'OH! vous accompagne à chaque instant et vous permet de visiter Luxembourg à Vélo</p>
-            <p>Ici, le site vous permet de connaitre des vélos disponibles dans les stations et choisir le vélo de votre choix
-            </p>
-            <button type="button" class="btn btn-outline-success btn-sm mb-2">
-                <a href="#" class="btn">Plus de details</a>
-            </button>
-        </header>
-        <section id="diaporama">
+        var marqueur = myMap.tabMarqueur[myMap.tabMarqueur.length - 1];
 
-            <div id="diaporama-slider">
-                <div class="slideshow-container">
-                    <div class="mySlides">
-                        <div class="image">
-                            <img id="diapo" src="Images/image1.png" alt="image_1">
-                        </div>
-                        <div class="text container">
-                            <div class="row">
-                                <h3 class="col-sm-12"> Bienvenue sur Vél'oh</h3>
-                                <p class="col-sm-12"> Réservez votre vélo maintenant en suivant ces quelques étapes. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--  premier Slide -->
-                    <!-- Deuxième Slide -->
-                    <div class="mySlides ">
-                        <div class="image">
+        // create a HTML element for each feature
 
-                            <img src="Images/image2.png" alt="image_2">
-                        </div>
-                        <div class="text container">
-                            <div class="row">
-                                <h3 class="col-sm-12"> Choisir sa Station</h3>
-                                <p class="col-sm-12">C'est simple, allez sur la carte et sélectionner la station de votre choix.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- troisieme Slide -->
-                    <div class="mySlides ">
-                        <div class="image">
-                            <img src="Images/image3.png" alt="image_3">
-                        </div>
-                        <div class="text container">
-                            <div class="row">
-                                <h3 class="col-sm-12"> Réservez !</h3>
-                                <p class="col-sm-12">Il ne vous reste plus qu'à cliquer sur le bouton Réserver</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id=boutonPlayPause>
-                    <i class="fas fa-arrow-circle-left" id="precedent"></i>
-                    <i class="fas fa-pause-circle" id="bouton_pause"></i>
-                    <i class="fas fa-play-circle" id="bouton_play"></i>
-                    <i class="fas fa-arrow-circle-right" id="suivant"></i>
-                </div>
-            </div>
-        </section>
-        <!--Balise MAPBox-->
+        var el = document.createElement('div');
+        el.className = 'marker';
 
-        <div class="initText">
-            <p> <i class="fas fa-angle-double-down"></i> Cliquez sur la station de votre choix</p>
-        </div>
-        <div class="mapLuxembourg">
-
-            <div id="mapZone">
-                <div id='map'></div>
-            </div>
-        </div>
-        <div id="station_non_reservable">
-            <p> Vous ne pouvez pas reserver car il n'y a pas de vélo disponible! </p>
-        </div>
-        <section id="formulaire">
-            <div class="container-fluid">
-                <div class="row justify-content-between">
-
-                    <div class="col col12 col-md-3">
-                        <div class="infos_station">
-                            <h2> Détails de la station </h2>
-                            <p class="adresse">Adresse : </p>
-                            <p class="status">Status :</p><span class="statusValue"></span>
-                            <p class="velo_dispo"> Vélos Disponibles</p>
-                            <p class="place_dispo">Places disponibles: </p>
-                            <p id="buttonform" class="boutonS"><input type="submit" value="Reserver" /></p>
-                        </div>
-                    </div>
-                    <div class="col col-12 col-md-8">
-                        <form id="form_reserver">
-                            <div class="infos_utilisateur container">
-                                <dic class="row justify-content-between">
-                                    <div class="infos_ut col col-12 col-md-6">
-                                        <h2>Reservation</h2>
-                                        <p><label for="prenom">Votre Prenom</label>
-                                            <input type="text" name="prenom" placeholder="Prenom" id="filed1" maxlength="20" required/></p>
-                                        <p><label for="nom">Votre Nom</label>
-                                            <input type="text" name="nom" placeholder="Nom" id="filed2" maxlength="20" required/></p>
-                                    </div>
-                                    <div class="buttonformulaire col col-12 col-md-6">
-                                        <h2>Signature</h2>
-                                        <canvas id="myCanvas" width="200" height="100 "></canvas>
-                                        <p class="boutonS"><input id="valider" type="submit" value="Valider" /></p>
-                                        <p class="boutonS effacer"><input id="effacer" type="submit" value="Effacer" /></p>
-                                    </div>
-                                </dic>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div id="timer">
-                <p id="reservation_text"></p>
-                <p id="timertext"></p>
-            </div>
-        </section>
+        //ajouter des marqueurs selon le nombre de vélos
+        el.style.backgroundImage = marqueur.getMarkerImage();
 
 
+        // make a marker for each feature and add it to the map
+        var tempMrker = new mapboxgl.Marker(el);
+        /* myMap.mapParam.zoom = 15;*/
 
-        <footer id="footer">
-            <div id="contact">
-                <h3 class="contact">Nous contacter</h3>
-                <p>Du lundi au samedi de 8h à 18h</p>
-                <p>Le dimanche et les jours fériés de 10h à 18h</p>
-                <p>01 20 30 40 50</p>
-            </div>
-        </footer>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
-        <script src="Diaporama.js "></script>
-        <script src="StationVelo.js "></script>
-        <script src="marqueur.js "></script>
-        <script src="mapLuxembourg.js "></script>
-        <script src="JCDecauxConnector.js "></script>
-        <script src="Timer.js "></script>
-        <script src="InitReservation.js "></script>
-        <script src="main.js "></script>
-    </div>
-</body>
+        //tempMrker.setLngLat.setPopup(popUps)
+        tempMrker.setLngLat(marqueur.coordinates);
+        tempMrker.addTo(myMap.map);
+        //tempMrker.setPopup(popUps);
+        var markerStorage;
+        el.addEventListener('click', (e) => {
+            document.getElementsByClassName("adresse")[0].textContent = "Adresse : " + marqueur.station.address;
+            document.getElementsByClassName("statusValue")[0].textContent = marqueur.station.status;
+            marqueur.colorStatus();
+            marqueur.nonResa();
+            document.getElementsByClassName("velo_dispo")[0].textContent = "Vélos disponibles : " + marqueur.station.availableBikes;
+            document.getElementsByClassName("place_dispo")[0].textContent = "Places disponibles : " + marqueur.station.availableBikeStands;
+            document.getElementsByClassName('infos_station')[0].style.display = "block";
+            document.getElementsByClassName('initText')[0].style.display = "none";
+            markerStorage = JSON.stringify(marqueur.station);
+            sessionStorage.setItem("StationStorage", markerStorage);
+        });
+    });
+}
 
-</html>
+var ddd = new InitReservation();
+ddd.initStorage();
+ddd.clearCanvas();
+ddd.init();
+
+var dddddd = document.getElementById("valider");
+dddddd.addEventListener("click", function() {
+
+    document.getElementsByClassName("infos_station")[0].style.display = 'none';
+    ddd.window.style.display = 'none';
+
+    // instantier la class de Timer + stocker(sessionStorage)*/
+    var counterTimer = new Timer(20);
+    counterTimer.startCounter();
+
+    //stocker (sessionStorage) station Vélos actuelle
+    currentStationValid = sessionStorage.getItem('StationStorage');
+    sessionStorage.setItem('currentStation', currentStationValid);
+    currentStationV = JSON.parse(sessionStorage.getItem('StationStorage'));
+
+    //Stocker nom et prenom dans session storage.
+    var currentStorageName = ddd.form.nom.value;
+    sessionStorage.setItem("storageName", currentStorageName);
+    var currentStorageFirstName = ddd.form.prenom.value;
+    sessionStorage.setItem("storageFirstName", currentStorageFirstName);
+    document.getElementById("reservation_text").textContent = "Vélo reservé à la station :" + " " + currentStationV.address + " par " + currentStorageName + " " + currentStorageFirstName;
+})
+
+// verification reservation en cours
+if (sessionStorage.getItem("counterStorage")) {
+    var time = sessionStorage.getItem("counterStorage");
+    document.getElementsByClassName('initText')[0].style.display = "none";
+    var counterTimer = new Timer(time);
+    counterTimer.startCounter();
+
+    document.getElementById("reservation_text").textContent = "Vélo reservé à la station :" + " " + JSON.parse(sessionStorage.getItem("StationStorage")).address + " par " + sessionStorage.getItem("storageName") + " " + sessionStorage.getItem("storageFirstName");
+}
