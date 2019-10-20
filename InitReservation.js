@@ -8,13 +8,13 @@ class InitReservation {
         this.canvas.addEventListener("mousedown", this.initCanvas.bind(this));
         this.canvas.addEventListener("mousemove", this.onMoveMouse.bind(this));
         this.canvas.addEventListener("mouseup", this.finTrace.bind(this));
-        this.effacer = document.getElementById("affacer");
-        this.datas = {};
-        this.currentFirstName = document.getElementById("filed1");
-        this.currentName = document.getElementById("filed2");
-        this.missPrenom = document.getElementById("missPrenom");
-        //this.currentReservation = document.getElementById("reservation_text");
+        this.compteur = 0;
+        this.effacer = document.getElementById("effacer");
+        this.initTouchEvent();
 
+        this.radius = 2;
+        this.datas = {};
+        this.form = document.querySelector("form");
     }
     init() {
         this.boutonForm.addEventListener("click", (e) => {
@@ -51,7 +51,6 @@ class InitReservation {
     }
     clearCanvas() {
         this.effacer.addEventListener("click", () => {
-
             const width = this.canvas.clientWidth;
             const height = this.canvas.clientHeight;
             this.ctx.beginPath();
@@ -59,29 +58,52 @@ class InitReservation {
             this.ctx.stroke();
         })
     }
-    initStorage() {
+    putPoint(e) {
+        var touch = e.changedTouches;
+        e.preventDefault();
+        if (this.flagClick === true) {
+            this.ctx.loneWidth = 4;
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.clientX, touch.clinetY);
+            this.ctx.lineTo(touch.clientX, this.clientY);
+            this.closePath();
+            this.ctx.stroke();
+        }
+    }
+    engage(e) {
+        e.preventDefault();
+        this.flagClick = true;
+        this.putPoint(e);
+    }
 
+    initTouchEvent() {
+        this.canvas.addEventListener("touchstart", function(e) {
+            this.engage(e);
+            this.compteur++;
+        }.bind(this));
+        /*this.canvas.addEventListener("touchend", this.disengage().bind(this));*/
+        this.canvas.addEventListener("touchleave", this.finTrace.bind(this));
+        this.canvas.addEventListener("touchmove", function(e) { this.putPoint(e) }.bind(this));
+    }
+    initStorage() {
         if (localStorage['formulaire']) {
             // parser la valeur de la clé formulaire.
             var localS = JSON.parse(localStorage['formulaire']);
             //localS est un objet JSON
-            this.currentFirstName.value = localS[this.currentFirstName.id];
-            this.currentName.value = localS[this.currentName.id];
+            this.form.prenom.value = localS[this.form.prenom.id];
+            this.form.nom.value = localS[this.form.nom.id];
         }
+        this.form.prenom.addEventListener("keypress", (e) => {
 
-        this.currentFirstName.addEventListener("keypress", (e) => {
-
-            this.datas[e.target.id] = this.currentFirstName.value + e.key;
+            this.datas[e.target.id] = this.form.prenom.value + e.key;
             var stringdatas = JSON.stringify(this.datas)
             localStorage.setItem('formulaire', stringdatas);
         });
-
-        this.currentName.addEventListener("keypress", (e) => {
-            this.datas[e.target.id] = this.currentName.value + e.key;
+        this.form.nom.addEventListener("keypress", (e) => {
+            this.datas[e.target.id] = this.form.nom.value + e.key;
             // valeur de la clé de localStorage est une chaine de caractère.
             var stringdatas = JSON.stringify(this.datas);
             localStorage.setItem('formulaire', stringdatas);
-
         });
     }
 }
