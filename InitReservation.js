@@ -8,11 +8,11 @@ class InitReservation {
         this.canvas.addEventListener("mousedown", this.initCanvas.bind(this));
         this.canvas.addEventListener("mousemove", this.onMoveMouse.bind(this));
         this.canvas.addEventListener("mouseup", this.finTrace.bind(this));
-       /* this.compteur = 0;*/
+        this.compteur = 0;
         this.effacer = document.getElementById("effacer");
-       /* this.initTouchEvent();*/
+        this.initTouchEvent();
 
-       /* this.radius = 2;*/
+        this.radius = 2;
         this.datas = {};
         this.form = document.querySelector("form");
     }
@@ -58,7 +58,7 @@ class InitReservation {
             this.ctx.stroke();
         })
     }
-   /* putPoint(e) {
+   putPoint(e) {
         var touch = e.changedTouches;
         e.preventDefault();
         if (this.flagClick === true) {
@@ -84,7 +84,7 @@ class InitReservation {
         this.canvas.addEventListener("touchend", this.disengage().bind(this));
         this.canvas.addEventListener("touchleave", this.finTrace.bind(this));
         this.canvas.addEventListener("touchmove", function(e) { this.putPoint(e) }.bind(this));
-    }*/
+    }
     initStorage() {
         if (localStorage['formulaire']) {
             // parser la valeur de la clé formulaire.
