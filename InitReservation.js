@@ -81,7 +81,7 @@ class InitReservation {
             this.engage(e);
             this.compteur++;
         }.bind(this));
-        this.canvas.addEventListener("touchend", this.disengage().bind(this));
+        /*this.canvas.addEventListener("touchend", this.disengage().bind(this));*/
         this.canvas.addEventListener("touchleave", this.finTrace.bind(this));
         this.canvas.addEventListener("touchmove", function(e) { this.putPoint(e) }.bind(this));
     }
