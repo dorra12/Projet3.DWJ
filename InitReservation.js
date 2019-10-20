@@ -10,9 +10,9 @@ class InitReservation {
         this.canvas.addEventListener("mouseup", this.finTrace.bind(this));
        /* this.compteur = 0;*/
         this.effacer = document.getElementById("effacer");
-        this.initTouchEvent();
+       /* this.initTouchEvent();*/
 
-        this.radius = 2;
+       /* this.radius = 2;*/
         this.datas = {};
         this.form = document.querySelector("form");
     }
