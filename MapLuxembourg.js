@@ -2,7 +2,6 @@ class MapLuxembourg {
     constructor() {
         this.tabMarqueur = [];
         this.mapParam = {
-
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
             zoom: 12,
@@ -15,5 +14,23 @@ class MapLuxembourg {
     addMarqueur(stationJCD) {
         var marqueur = new Marqueur(stationJCD);
         this.tabMarqueur.push(marqueur);
+        var el = document.createElement('div');
+        el.className = 'marker';
+        //ajouter des marqueurs selon le nombre de vélos
+        el.style.backgroundImage = marqueur.getMarkerImage();
+        // make a marker for each feature and add it to the map
+        var tempMrker = new mapboxgl.Marker(el);
+        //tempMrker.setLngLat.setPopup(popUps)
+        tempMrker.setLngLat(marqueur.coordinates);
+        tempMrker.addTo(this.map);
+        //tempMrker.setPopup(popUps);
+        var markerStorage;
+        el.addEventListener('click', (e) => {
+            marqueur.infosMarqueur()
+            marqueur.colorStatus();
+            marqueur.noReservation();
+            markerStorage = JSON.stringify(marqueur.station);
+            sessionStorage.setItem("StationStorage", markerStorage);
+        });
     }
 }
