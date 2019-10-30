@@ -4,9 +4,15 @@ class Marqueur {
         this.station = new StationVelo(stationJCD);
         this.nonReservable = document.getElementById("station_non_reservable");
         this.buttonform = document.getElementById("buttonform");
-        this.marqueurCible = document.getElementsByClassName("marker");
         this.infoStation = document.getElementsByClassName("infos_station")[0];
         this.window = document.getElementById("form_reserver");
+         this.details = document.getElementsByClassName("infos_station")[0];
+        this.element = this.details.querySelectorAll("p");
+        this.adresse = this.element[0];
+        this.statusValue = this.element[1];
+        this.veloDispo = this.element[2];
+        this.placeDispo = this.element[3];
+        this.initText = document.getElementsByClassName('initText')[0];
     }
     colorStatus() {
 
@@ -14,7 +20,7 @@ class Marqueur {
             document.getElementsByClassName("statusValue")[0].style.color = "green";
         }
     }
-    nonResa() {
+    noReservation(){
 
         if (this.station.availableBikes == 0) {
             this.window.style.display = "none";
@@ -39,6 +45,14 @@ class Marqueur {
     }
     stylechange() {
         this.infoStation.style.height = '100%';
+    }
+     infosMarqueur() {
+        this.adresse.textContent = "Adresse : " + this.station.address;
+        this.statusValue.textContent = this.station.status;
+        this.veloDispo.textContent = "Vélos disponibles : " + this.station.availableBikes;
+        this.placeDispo.textContent = "Places disponibles : " + this.station.availableBikeStands;
+        this.infoStation.style.display = "block";
+        this.initText.style.display = "none";
     }
 
 }
