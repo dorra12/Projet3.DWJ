@@ -29,39 +29,6 @@ stationConnector.request.onload = function() {
     var stationsJCD = stationConnector.request.response;
     stationsJCD.forEach(function(stationJCD) {
         myMap.addMarqueur(stationJCD);
-
-        var marqueur = myMap.tabMarqueur[myMap.tabMarqueur.length - 1];
-
-        // create a HTML element for each feature
-
-        var el = document.createElement('div');
-        el.className = 'marker';
-
-        //ajouter des marqueurs selon le nombre de vélos
-        el.style.backgroundImage = marqueur.getMarkerImage();
-
-
-        // make a marker for each feature and add it to the map
-        var tempMrker = new mapboxgl.Marker(el);
-        /* myMap.mapParam.zoom = 15;*/
-
-        //tempMrker.setLngLat.setPopup(popUps)
-        tempMrker.setLngLat(marqueur.coordinates);
-        tempMrker.addTo(myMap.map);
-        //tempMrker.setPopup(popUps);
-        var markerStorage;
-        el.addEventListener('click', (e) => {
-            document.getElementsByClassName("adresse")[0].textContent = "Adresse : " + marqueur.station.address;
-            document.getElementsByClassName("statusValue")[0].textContent = marqueur.station.status;
-            marqueur.colorStatus();
-            marqueur.nonResa();
-            document.getElementsByClassName("velo_dispo")[0].textContent = "Vélos disponibles : " + marqueur.station.availableBikes;
-            document.getElementsByClassName("place_dispo")[0].textContent = "Places disponibles : " + marqueur.station.availableBikeStands;
-            document.getElementsByClassName('infos_station')[0].style.display = "block";
-            document.getElementsByClassName('initText')[0].style.display = "none";
-            markerStorage = JSON.stringify(marqueur.station);
-            sessionStorage.setItem("StationStorage", markerStorage);
-        });
     });
 }
 
