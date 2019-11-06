@@ -45,7 +45,7 @@ validate.addEventListener("click", function(event) {
     reserver.window.style.display = 'none';
 
     // instantier la class de Timer + stocker(sessionStorage)*/
-    var counterTimer = new Timer(20);
+    var counterTimer = new Timer(1200);
     counterTimer.startCounter();
 
     //stocker (sessionStorage) station Vélos actuelle
