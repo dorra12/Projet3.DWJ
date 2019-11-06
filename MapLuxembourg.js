@@ -25,12 +25,21 @@ class MapLuxembourg {
         tempMrker.addTo(this.map);
         //tempMrker.setPopup(popUps);
         var markerStorage;
-        el.addEventListener('click', (e) => {
-            marqueur.infosMarqueur()
-            marqueur.colorStatus();
-            marqueur.noReservation();
-            markerStorage = JSON.stringify(marqueur.station);
-            sessionStorage.setItem("StationStorage", markerStorage);
+       el.addEventListener('click', (e) => {
+            if (sessionStorage.getItem("counterStorage")) {
+                var reponse = confirm("Attention ! Une réservation est en cours. Voulez vous continuez et annuler votre réservation ?")
+                if (reponse === true) {
+                    sessionStorage.clear();
+                    document.getElementById('reservation_text').style.display = "none";
+                    document.getElementById('timertext').style.display = "none";
+                }
+            } else {
+                marqueur.infosMarqueur()
+                marqueur.colorStatus();
+                marqueur.noReservation();
+                markerStorage = JSON.stringify(marqueur.station);
+                sessionStorage.setItem("StationStorage", markerStorage);
+            }
         });
     }
 }
