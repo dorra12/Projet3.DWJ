@@ -7,6 +7,7 @@ class Timer {
         this.afficheur;
     }
     countDown() {
+        this.counter = sessionStorage.getItem("counterStorage");
         if (this.counter > 0) {
             this.counter -= 1;
             this.afficheur = sessionStorage.setItem("counterStorage", this.counter);
