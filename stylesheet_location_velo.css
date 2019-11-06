@@ -1,8 +1,8 @@
 /* CORE STYLES */
 
  :root {
-    --primary-color: rgba(193, 198, 199, 0.5);
-    --overlay-color: rgba(23, 35, 46, 0.85);
+    --primary-color: rgba(204, 200, 200, 0.5);
+    --overlay-color: rgba(112, 129, 145, 0.85);
     --second-color: rgb(195, 197, 199);
     --menu-speed: 0.75s;
 }
@@ -376,7 +376,11 @@ input:hover {
 footer {
     background: var(--overlay-color);
 }
-
+#contact p {
+    display: flex;
+    color: black;
+    line-height: 1;
+}
 
 /********************************/
 
