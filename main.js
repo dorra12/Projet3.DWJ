@@ -59,6 +59,8 @@ validate.addEventListener("click", function(event) {
     var currentStorageFirstName = reserver.form.prenom.value;
     sessionStorage.setItem("storageFirstName", currentStorageFirstName);
     counterTimer.reservationText.textContent = "Vélo reservé à la station :" + " " + currentStationV.address + " par : " + currentStorageName + "   " + currentStorageFirstName;
+    counterTimer.reservationText.style.display = 'block';
+    counterTimer.timerText.style.display = 'block';
     event.preventDefault();
 });
 
